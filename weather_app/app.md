@@ -51,7 +51,7 @@ http://api.weatherapi.com/v1/current.json?key=0194917af2834c43a0674246263001&q=p
         "is_day": 1,
         "condition": {
             "text": "Partly Cloudy",
-            "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
             "code": 1003
         },
         "wind_mph": 8.1,
