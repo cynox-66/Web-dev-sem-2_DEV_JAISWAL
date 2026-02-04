@@ -1,36 +1,74 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="Weather_style.css">
-  </head>
-  <body>
-    <header>
-      <div class="input-container">
-        <input type="text" name="" id="" placeholder="Enter location..." />
-        <button id="search">Search</button>
-      </div>
-    </header>
-    <main>
-      <div class="weather-container">
-        <div class="temperature">12.5 C</div>
-        <div class="location-date">
-          <div class="location">Delhi</div>
-          <span class="time">12:50</span>
-          <span class="day">Friday</span>
-          <span class="date">2026-01-30</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather · A Window</title>
+  <meta name="description" content="A quiet window into the weather where you are." />
+
+  <!-- Google Fonts: Nunito (warm, friendly, readable) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="Weather_style.css">
+</head>
+
+<body>
+  <!-- Dynamic Weather Scene -->
+  <div class="scene-container" id="scene">
+    <!-- Background layers -->
+    <div class="scene-background" id="scene-bg"></div>
+
+    <!-- Weather particles -->
+    <div class="weather-particles" id="particles"></div>
+
+    <!-- Scene overlay for depth -->
+    <div class="scene-overlay"></div>
+  </div>
+
+  <!-- Weather Content -->
+  <div class="content-wrapper">
+    <!-- Search -->
+    <div class="search-area">
+      <input type="text" id="location-input" placeholder="Where are you?" autocomplete="off" />
+      <button id="search" aria-label="Search location">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Weather Information -->
+    <main class="weather-info">
+      <!-- Primary info -->
+      <div class="primary-info">
+        <div class="temperature-group">
+          <div class="temperature" id="temperature">18°</div>
+          <div class="feels-like" id="feels-like">Feels like 16°</div>
         </div>
-        <div class="weather-status">
-          <div class="icon">
-            <img src="//cdn.weatherapi.com/weather/64x64/day/113.png" alt="weather-status-image" />
-          </div>
-          <div class="condition">Sunny</div>
+
+        <div class="condition" id="condition">Clear Sky</div>
+        <div class="mood-label" id="mood">A peaceful afternoon</div>
+      </div>
+
+      <!-- Location & Time -->
+      <div class="location-info">
+        <div class="location" id="location">Delhi</div>
+        <div class="time-info">
+          <span id="time">2:30 PM</span>
+          <span class="separator">·</span>
+          <span id="day">Tuesday</span>
         </div>
       </div>
     </main>
-    <script src="Weather_script.js"></script>
-  </body>
+  </div>
+
+  <script src="Weather_script.js"></script>
+</body>
+
 </html>

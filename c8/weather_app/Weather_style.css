@@ -1,26 +1,458 @@
-header {
-  height: 100px;
-  background-color: slategray;
+/* ============================================
+   WEATHER APP — Scene-Based Experience
+   A calm window into the current moment
+   ============================================ */
+
+:root {
+  /* Base Typography */
+  --font-main: 'Nunito', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  /* Timing */
+  --ease-gentle: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 1.2s;
+  --transition-medium: 0.6s;
+  --transition-fast: 0.3s;
+  
+  /* Scene Colors - Default (Sunny) */
+  --scene-sky-top: #87CEEB;
+  --scene-sky-bottom: #FFF4E0;
+  --scene-accent: rgba(255, 220, 120, 0.4);
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.45);
+  --input-bg: rgba(255, 255, 255, 0.75);
+  --input-border: rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   BASE LAYOUT
+   ============================================ */
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  position: relative;
+}
+
+/* ============================================
+   SCENE SYSTEM
+   ============================================ */
+
+.scene-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scene-background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--scene-sky-top) 0%,
+    var(--scene-sky-bottom) 100%
+  );
+  transition: background var(--transition-slow) var(--ease-gentle);
+}
+
+/* Weather Particles Layer */
+.weather-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Scene Overlay (for depth/atmosphere) */
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--scene-accent);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: background var(--transition-slow) var(--ease-gentle);
+}
+
+/* ============================================
+   WEATHER SCENE STATES
+   ============================================ */
+
+/* Sunny Scene */
+.scene-sunny {
+  --scene-sky-top: #87CEEB;
+  --scene-sky-bottom: #FFF4E0;
+  --scene-accent: rgba(255, 220, 120, 0.3);
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.45);
+}
+
+/* Cloudy Scene */
+.scene-cloudy {
+  --scene-sky-top: #B0C4DE;
+  --scene-sky-bottom: #E8E8E8;
+  --scene-accent: rgba(180, 190, 200, 0.25);
+  --text-primary: rgba(0, 0, 0, 0.8);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.4);
+}
+
+/* Rainy Scene */
+.scene-rainy {
+  --scene-sky-top: #6B7B8C;
+  --scene-sky-bottom: #A8B5C0;
+  --scene-accent: rgba(100, 120, 140, 0.2);
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.2);
+  --input-border: rgba(255, 255, 255, 0.3);
+}
+
+/* Night Scene */
+.scene-night {
+  --scene-sky-top: #1a1a2e;
+  --scene-sky-bottom: #2d3561;
+  --scene-accent: rgba(100, 120, 200, 0.15);
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --input-bg: rgba(255, 255, 255, 0.15);
+  --input-border: rgba(255, 255, 255, 0.25);
+}
+
+/* Snowy Scene */
+.scene-snowy {
+  --scene-sky-top: #D4E4F7;
+  --scene-sky-bottom: #F0F4F8;
+  --scene-accent: rgba(200, 220, 240, 0.3);
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.45);
+}
+
+/* ============================================
+   CONTENT WRAPPER
+   ============================================ */
+
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: var(--space-lg);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SEARCH AREA
+   ============================================ */
+
+.search-area {
+  display: flex;
   align-items: center;
+  gap: var(--space-xs);
+  background: var(--input-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--input-border);
+  border-radius: 24px;
+  padding: 6px 6px 6px var(--space-md);
+  margin-bottom: var(--space-xl);
+  transition: 
+    background var(--transition-medium) var(--ease-gentle),
+    border-color var(--transition-medium) var(--ease-gentle),
+    transform var(--transition-fast) var(--ease-gentle);
 }
 
-main {
-  height: calc(100vh - 100px);
-  background-color: darkslategray;
+.search-area:focus-within {
+  transform: scale(1.01);
+}
+
+#location-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+  padding: 10px 0;
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+#location-input::placeholder {
+  color: var(--text-muted);
+}
+
+#search {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--scene-sky-bottom);
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: white;
+  justify-content: center;
+  transition: 
+    transform var(--transition-fast) var(--ease-gentle),
+    opacity var(--transition-fast) var(--ease-gentle);
 }
 
-.weather-container{
-    display: flex;
-    gap: 1rem;
+#search:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
 }
 
-.input-container {
+#search:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   WEATHER INFORMATION
+   ============================================ */
+
+.weather-info {
+  flex: 1;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xl);
+  animation: gentle-rise 1.5s var(--ease-gentle);
+}
+
+@keyframes gentle-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Primary Information */
+.primary-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.temperature-group {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+}
+
+.temperature {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -3px;
+  color: var(--text-primary);
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+.feels-like {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+.condition {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+.mood-label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-style: italic;
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+/* Location & Time */
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--input-border);
+  transition: border-color var(--transition-medium) var(--ease-gentle);
+}
+
+.location {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+.time-info {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  transition: color var(--transition-medium) var(--ease-gentle);
+}
+
+.separator {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+/* ============================================
+   WEATHER PARTICLES
+   Individual particle classes added by JS
+   ============================================ */
+
+/* Cloud particles */
+.particle-cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: drift linear infinite;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(-10%);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+/* Rain particles */
+.particle-rain {
+  position: absolute;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Snow particles */
+.particle-snow {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: snow-fall linear infinite;
+}
+
+@keyframes snow-fall {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Stars (for night) */
+.particle-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: var(--space-md);
+  }
+  
+  .temperature {
+    font-size: 4.5rem;
+  }
+  
+  .temperature-group {
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: flex-start;
+  }
+  
+  .condition {
+    font-size: 1.25rem;
+  }
+  
+  .search-area {
+    margin-bottom: var(--space-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    max-width: 600px;
+    padding: var(--space-xl);
+  }
+  
+  .temperature {
+    font-size: 7rem;
+  }
+  
+  .weather-info {
+    gap: calc(var(--space-xl) * 1.5);
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-wrapper {
+    max-width: 700px;
+  }
+  
+  .temperature {
+    font-size: 8rem;
+  }
 }
