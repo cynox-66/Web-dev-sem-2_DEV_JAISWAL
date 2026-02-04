@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Flow Playground — Learn Capturing & Bubbling</title>
+    <meta name="description" content="Interactive JavaScript playground to learn event capturing, bubbling, and propagation with visual feedback." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+    <header class="header">
+      <div class="header-content">
+        <h1>Event Flow Playground</h1>
+        <p class="subtitle">Understanding Capturing, Bubbling & Propagation</p>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- Left side: Interactive nested elements -->
+      <section class="interaction-area">
+        <div id="grandparent" class="event-box grandparent-box">
+          <span class="box-label">Grandparent</span>
+          <div id="parent" class="event-box parent-box">
+            <span class="box-label">Parent</span>
+            <div id="child" class="event-box child-box">
+              <span class="box-label">Child</span>
+            </div>
+          </div>
+        </div>
+        <p class="hint">Click any element to see the event flow</p>
+      </section>
+
+      <!-- Right side: Controls and Event Log -->
+      <aside class="sidebar">
+        <!-- Control Panel -->
+        <div class="control-panel">
+          <h2 class="panel-title">Controls</h2>
+          
+          <div class="control-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-capturing" checked />
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">Enable Capturing</span>
+            </label>
+            
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-bubbling" checked />
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">Enable Bubbling</span>
+            </label>
+            
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-stop-propagation" />
+              <span class="toggle-switch"></span>
+              <span class="toggle-text">Stop at Target</span>
+            </label>
+          </div>
+
+          <button id="reset-button" class="reset-button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            Reset Playground
+          </button>
+        </div>
+
+        <!-- Event Log Panel -->
+        <div class="event-log-panel">
+          <div class="log-header">
+            <h2 class="panel-title">Event Log</h2>
+            <button id="clear-log-button" class="clear-button">Clear</button>
+          </div>
+          <div id="log-container" class="log-container">
+            <p class="log-placeholder">Events will appear here...</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- MY OLD CODE -->
+
+
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Propagation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+    <div id="heading">
+      <h1>Event Flow Playground</h1>
+      <br />
+      <h3>Demonstrating Capturing , Bubbling & Propagation control</h3>
+    </div>
+
+    <div id="main">
+      <div id="Grandparent">
+        <h4>Grandparent</h4>
+        <div id="parent">
+          <h4>parent</h4>
+          <div id="child">
+            <h4>child</h4>
+          </div>
+        </div>
+      </div>
+
+      <div id="EventLog">
+        <h4>Event Log</h4>
+        <br />
+        <div id="log"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+ -->
