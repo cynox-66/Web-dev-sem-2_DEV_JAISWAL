@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+#counter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 5px rgb(244, 170, 241);
+}
+p{
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+#count{
+    font-weight: bold;
+    color: #0a4a8a;
+    text-align: center;
+    font-size: 10rem;
+    line-height: 1.5;
+}
+.buttons{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+}
+#increment{
+    background: #4CAF50;
+    color: white;
+    border: solid black 1.5px;
+    padding: 10px 20px;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+#decrement{
+    background: #f44336;
+    color: white;
+    border: solid black 1.5px;
+    padding: 10px 20px;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+#reset{
+    background: #2196F3;
+    color: white;
+    border: solid black 1.5px;
+    padding: 10px 20px;
+    border-radius: 1px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
