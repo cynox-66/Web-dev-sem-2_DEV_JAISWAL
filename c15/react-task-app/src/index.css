@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════════
+   🎸 PUNK / COMIC BOOK GLOBAL STYLES
+   Bold colors, hard shadows, chunky fonts, LOUD vibes.
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  /* ── LOUD colors ── */
+  --yellow:  #FFD600;
+  --red:     #FF2D2D;
+  --blue:    #00AEEF;
+  --green:   #00E676;
+  --pink:    #FF4DCC;
+  --orange:  #FF8C00;
+  --purple:  #B14AFF;
+
+  /* ── Core palette ── */
+  --bg:      #1a1a2e;        /* dark base */
+  --surface: #252542;        /* card/panel bg */
+  --text:    #ffffff;        /* primary text = white */
+  --text-dim: rgba(255, 255, 255, 0.55);  /* secondary text */
+  --border:  #000000;        /* THICK black borders everywhere */
+
+  /* ── Hard shadow (the punk signature) ── */
+  --shadow: 5px 5px 0px #000;
+  --shadow-sm: 3px 3px 0px #000;
+  --shadow-pressed: 2px 2px 0px #000;   /* "clicked" state */
+
+  /* ── Fonts ── */
+  --font-heading: 'Bangers', cursive;          /* comic book headings */
+  --font-body: 'Outfit', system-ui, sans-serif; /* clean readable body */
+
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* ── Wild halftone-dot pattern background ── */
+  background-color: var(--bg);
+  background-image:
+    /* Diagonal comic stripes */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255, 255, 255, 0.015) 20px,
+      rgba(255, 255, 255, 0.015) 22px
+    ),
+    /* Radial dot pattern (halftone feel) */
+    radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: auto, 24px 24px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 100svh;
+}
+
+/* ── Selection color — on-brand ── */
+::selection {
+  background: var(--yellow);
+  color: #000;
+}

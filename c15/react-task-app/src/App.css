@@ -1,0 +1,659 @@
+/* ═══════════════════════════════════════════════════
+   🎸 TASKFLOW — PUNK / COMIC BOOK STYLES 🎸
+   Bold. Loud. Chunky. Hard shadows. Sticker cards.
+   Inspired by: comic books, street posters, pop art.
+   ═══════════════════════════════════════════════════ */
+
+
+/* ══════════════════════════════
+   APP SHELL — centered container
+   ══════════════════════════════ */
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ═══════════════════════════════════════
+   HEADER — HUGE comic-book title
+   Uses Bangers font for that poster feel
+   ═══════════════════════════════════════ */
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.app-header h1 {
+  font-family: var(--font-heading);
+  font-size: 60px;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--yellow);
+  /* Hard text shadow = comic book lettering effect */
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000;
+  /* Slight tilt for that hand-pasted look */
+  transform: rotate(-1deg);
+}
+
+.app-subtitle {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin: 8px 0 0;
+  transform: rotate(0.5deg);
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.app-footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════
+   TASK INPUT — big chunky input + punchy button
+   ═══════════════════════════════════════════════ */
+.task-input {
+  display: flex;
+  gap: 10px;
+}
+
+/* Big bold input — thick black border, hard shadow */
+.task-input input {
+  flex: 1;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: #000;
+  background: var(--yellow);
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.task-input input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 600;
+}
+
+/* Focus = color swap + shadow shift (feels alive) */
+.task-input input:focus {
+  background: #fff;
+  box-shadow: 6px 6px 0 var(--pink);
+  transform: translate(-1px, -1px);
+}
+
+/* ADD button — loud and clicky */
+.task-input button {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: var(--font-body);
+  letter-spacing: 1px;
+  color: #000;
+  background: var(--green);
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+/* Hover = slight lift */
+.task-input button:hover:not(:disabled) {
+  background: var(--blue);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+/* Press = CLICKY feel (shadow shrinks, button moves down) */
+.task-input button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-pressed);
+}
+
+.task-input button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
+/* ════════════════════════════
+   SEARCH BAR — punk search box
+   ════════════════════════════ */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 40px 12px 46px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: #fff;
+  background: var(--surface);
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.search-bar input::placeholder {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.search-bar input:focus {
+  border-color: var(--blue);
+  box-shadow: 4px 4px 0 var(--blue);
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  background: var(--red);
+  border: 2px solid #000;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.1s;
+}
+
+.search-clear:hover {
+  transform: scale(1.1);
+}
+
+
+/* ═══════════════════════════════════
+   STATS BAR — bold number cards
+   Each stat looks like a mini sticker
+   ═══════════════════════════════════ */
+.stats-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 3px solid #000;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Big chunky numbers */
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  line-height: 1;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* Divider between stats */
+.stat-divider {
+  width: 3px;
+  background: #000;
+  border-radius: 2px;
+  align-self: stretch;
+}
+
+
+/* ══════════════════════════════════════════
+   FILTER BAR — big chunky colorful buttons
+   Each filter is a different loud color
+   ══════════════════════════════════════════ */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #000;
+  background: var(--surface);
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.filter-icon {
+  font-size: 15px;
+}
+
+/* Default state — dark bg, light text */
+.filter-btn {
+  color: var(--text-dim);
+}
+
+/* Hover — pop up and color swap */
+.filter-btn:hover:not(.active) {
+  background: var(--purple);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000;
+}
+
+/* Active = LOUD YELLOW */
+.filter-btn.active {
+  background: var(--yellow);
+  color: #000;
+  transform: rotate(-1deg);
+  box-shadow: var(--shadow);
+}
+
+
+/* ═══════════════════════════════
+   BULK ACTIONS — action buttons
+   ═══════════════════════════════ */
+.bulk-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.bulk-btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #000;
+  background: var(--blue);
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.bulk-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000;
+  background: var(--green);
+}
+
+.bulk-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-pressed);
+}
+
+/* Danger button = RED */
+.bulk-btn.danger {
+  background: var(--red);
+  color: #fff;
+}
+
+.bulk-btn.danger:hover {
+  background: var(--pink);
+}
+
+
+/* ══════════════════════
+   TASK LIST — container
+   ══════════════════════ */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   TASK ITEM — the star of the show ⭐
+   Each task is a colorful STICKER with a thick
+   black border and a hard shadow. They alternate
+   colors via .sticker-* classes.
+   ═══════════════════════════════════════════════ */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 3px solid #000;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  transition: all 0.12s ease;
+  animation: stickerPop 0.25s ease-out;
+  position: relative;
+}
+
+/* ── Sticker color rotation (one per color) ── */
+.sticker-yellow  { background: var(--yellow); color: #000; }
+.sticker-red     { background: var(--red);    color: #fff; }
+.sticker-blue    { background: var(--blue);   color: #000; }
+.sticker-green   { background: var(--green);  color: #000; }
+.sticker-pink    { background: var(--pink);   color: #000; }
+.sticker-orange  { background: var(--orange); color: #000; }
+.sticker-purple  { background: var(--purple); color: #fff; }
+
+/* Slight random rotations for that "hand-stuck" look */
+.task-item:nth-child(odd)  { transform: rotate(-0.5deg); }
+.task-item:nth-child(even) { transform: rotate(0.6deg); }
+.task-item:nth-child(3n)   { transform: rotate(-1deg); }
+
+/* Hover = lift up + bigger shadow */
+.task-item:hover {
+  transform: translate(-3px, -3px) rotate(0deg) !important;
+  box-shadow: 8px 8px 0 #000;
+  z-index: 2;
+}
+
+/* Completed tasks = faded + crosshatch overlay */
+.task-item.completed {
+  opacity: 0.5;
+  filter: saturate(0.4);
+}
+
+.task-item.completed:hover {
+  opacity: 0.7;
+}
+
+
+/* ═══════════════════════════════
+   CUSTOM CHECKBOX — punk style
+   ═══════════════════════════════ */
+.task-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Hover checkbox = color hint */
+.task-checkbox:hover {
+  background: var(--yellow);
+  transform: scale(1.1);
+}
+
+/* Checked = green with a fat checkmark */
+.task-checkbox:checked {
+  background: var(--green);
+}
+
+.task-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+
+/* ═══════════════
+   TASK TEXT
+   ═══════════════ */
+.task-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: default;
+  user-select: none;
+  line-height: 1.4;
+  /* Text color inherits from sticker class */
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+}
+
+
+/* ═════════════════════
+   EDIT INPUT (inline)
+   ═════════════════════ */
+.task-edit-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  color: #000;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1), 3px 3px 0 var(--pink);
+}
+
+
+/* ═══════════════════════════════
+   ACTION BUTTONS (edit / delete)
+   Hidden by default, pop on hover
+   ═══════════════════════════════ */
+.task-actions {
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.task-item:hover .task-actions {
+  opacity: 1;
+}
+
+.task-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  box-shadow: 2px 2px 0 #000;
+  transition: all 0.1s ease;
+}
+
+/* Click = pressed down */
+.task-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* Edit button hover = blue */
+.edit-btn {
+  color: #000;
+}
+
+.edit-btn:hover {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* Delete button hover = red */
+.delete-btn {
+  color: #000;
+}
+
+.delete-btn:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+
+/* ═══════════════════════════════
+   EMPTY STATE — funky empty message
+   ═══════════════════════════════ */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px;
+  border: 3px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+}
+
+.empty-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+  animation: emptyBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes emptyBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-8px) rotate(5deg); }
+}
+
+.empty-title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 #000;
+  margin: 0 0 4px;
+}
+
+.empty-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+
+/* ═══════════════════
+   ANIMATIONS
+   ═══════════════════ */
+
+/* Tasks pop in like stickers being slapped on */
+@keyframes stickerPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-3deg);
+  }
+  60% {
+    transform: scale(1.03) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+
+/* ═══════════════════
+   RESPONSIVE
+   ═══════════════════ */
+@media (max-width: 500px) {
+  .app {
+    padding: 20px 12px 40px;
+  }
+
+  .app-header h1 {
+    font-size: 40px;
+    letter-spacing: 2px;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    flex: 1 1 calc(33% - 6px);
+    font-size: 11px;
+    padding: 9px 6px;
+  }
+
+  .stat {
+    padding: 4px 10px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  /* Always show action buttons on mobile (no hover on touch) */
+  .task-actions {
+    opacity: 1;
+  }
+
+  .task-input {
+    flex-direction: column;
+  }
+}
